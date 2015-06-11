@@ -1,0 +1,50 @@
+{
+  "name": "storage-pod",
+  "version": "0.0.0",
+  "description": "Store data in Redis, get back the key it was stored at",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "redis": "^0.12.1",
+    "jshint": "^2.8.0",
+    "jscs": "^1.13.1",
+    "pre-commit": "^1.0.10",
+    "tape": "^4.0.0"
+  },
+  "scripts": {
+    "test": "node test.js",
+    "jshint": "jshint index.js test.js",
+    "jscs": "jscs index.js test.js",
+    "ci": "npm run test && npm run jshint && npm run jscs"
+  },
+  "pre-commit": [ "ci" ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/moonglum/storage-pod"
+  },
+  "keywords": [
+    "redis"
+  ],
+  "author": "Lucas Dohmen <lucas@dohmen.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moonglum/storage-pod/issues"
+  },
+  "homepage": "https://github.com/moonglum/storage-pod",
+  "jshintConfig": {
+    "curly": true,
+    "eqeqeq": true,
+    "forin": true,
+    "freeze": true,
+    "latedef": true,
+    "nonew": true,
+    "shadow": "outer",
+    "undef": true,
+    "unused": true,
+    "node": true,
+    "jasmine": true
+  },
+  "jscsConfig": {
+    "preset": "node-style-guide"
+  }
+}
