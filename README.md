@@ -12,7 +12,7 @@ npm install storage-pod --save
 
 ## Usage
 
-First, you create a storage function. For that you need a namespace you want to use for the generated keys (in our example that is `mynamespace`), a Redis client (which needs to be API compatible with the `redis` NPM package) and a serialize function. The serialize function is applied to your data before it is stored in Redis. In our example we use JSON as our serialization format, but you can choose whatever you want (MsgPack, ProtoBuf, transit... Just provide a function that takes data and returns it serialized).
+First, you create a storage function. For that you need a namespace you want to use for the generated keys (in our example that is `mynamespace`) and a Redis client (which needs to be API compatible with the `redis` NPM package).
 
 ```js
 var client = require('redis').createClient();
@@ -23,12 +23,22 @@ var store = createStorage('mynamespace', client, JSON.stringify);
 Now you have a `store` function, which you can use to store data. You provide it with a callback which will receive an error if something went wrong and the key that your data is accessible with:
 
 ```js
-store({ hello: 'world' }, function(storeErr, key) {
+store(JSON.stringify({ hello: 'world' }), function(storeErr, key) {
   // now you can use your key for whatever
 });
 ```
 
-You can now send the key to the other process. It will just need to `GET` the key from Redis and deserialize it.
+You can now send the key to the other process. It will just need to `GET` the key from Redis.
+
+As you want to serialize the value most of the time, you can provide a serialize function to the `createStorage` function as a third parameter. The serialize function is applied to your data before it is stored in Redis. In the following example we use JSON as our serialization format, but you can choose whatever you want (MsgPack, ProtoBuf, transit... Just provide a function that takes data and returns it serialized).
+
+```js
+var store = createStorage('mynamespace', client, JSON.stringify);
+
+// Now you can just provide an object:
+store({ hello: 'world' }, function(storeErr, key) {
+});
+```
 
 ## Contributing
 
