@@ -1,6 +1,6 @@
 {
   "name": "storage-pod",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Store data in Redis, get back the key it was stored at",
   "main": "index.js",
   "dependencies": {},

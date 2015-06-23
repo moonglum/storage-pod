@@ -1,7 +1,9 @@
 var nido = function(arr) { return arr.join(':'); };
+var identity = function(a) { return a; };
 
-module.exports = function(prefix, client, serialize) {
+module.exports = function(prefix, client, _serialize) {
   var counter = nido([prefix, 'counter']);
+  var serialize = _serialize || identity;
 
   return function(data, cb) {
     client.incr([counter], function(incrErr, current) {
