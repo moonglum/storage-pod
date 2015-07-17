@@ -15,12 +15,7 @@ module.exports = function(prefix, client, _serialize) {
       var key = nido([prefix, current]);
       var value = serialize(data);
       client.set([key, value], function(setErr) {
-        if (setErr) {
-          cb(setErr);
-          return;
-        }
-
-        cb(null, key);
+        cb(setErr, key);
       });
     });
   };
