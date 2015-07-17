@@ -17,7 +17,7 @@ First, you create a storage function. For that you need a namespace you want to 
 ```js
 var client = require('redis').createClient();
 var createStorage = require('storage-pod');
-var store = createStorage('mynamespace', client, JSON.stringify);
+var store = createStorage('mynamespace', client);
 ```
 
 Now you have a `store` function, which you can use to store data. You provide it with a callback which will receive an error if something went wrong and the key that your data is accessible with:
