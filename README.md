@@ -30,6 +30,8 @@ store(JSON.stringify({ hello: 'world' }), function(storeErr, key) {
 
 You can now send the key to the other process. It will just need to `GET` the key from Redis.
 
+### Serialize
+
 As you want to serialize the value most of the time, you can provide a serialize function to the `createStorage` function as an option. The serialize function is applied to your data before it is stored in Redis. In the following example we use JSON as our serialization format, but you can choose whatever you want (MsgPack, ProtoBuf, transit... Just provide a function that takes data and returns it serialized).
 
 ```js
@@ -39,6 +41,16 @@ var store = createStorage('mynamespace', client, {
 
 // Now you can just provide an object:
 store({ hello: 'world' }, function(storeErr, key) {
+});
+```
+
+### Set a TTL
+
+This library is meant to be used to send a piece of data to another process. What happens after the other library has read the data? It is now useless and can be deleted. You can either delete it when you have read it or you could set a TTL on it. If you want to go with the second option, you can do it like this (we set the time in milliseconds):
+
+```js
+var store = createStorage('mynamespace', client, {
+  ttl: 200 // The TTL for each stored value is now 200ms
 });
 ```
 
