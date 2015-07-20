@@ -1,6 +1,6 @@
 # Storage Pod [![build status](https://travis-ci.org/moonglum/storage-pod.svg)](https://travis-ci.org/moonglum/storage-pod)
 
-Store data in Redis, get back the key it was stored at. The purpose of the library is to transport chunks of data between multiple processes. It will serialize your data, store it in Redis and provide you with the key it used to store it. You can then send the key to the other process (for example via pub/sub or a queue) and it can then receive the package. That's all.
+Store data in Redis, get back the key it was stored at. The purpose of the library is to transport chunks of data between multiple processes. It will store your data in Redis and provide you with the key it used to store it. You can then send the key to the other process (for example via pub/sub or a queue) and it can then receive the package. That's all.
 
 ## Installation
 
