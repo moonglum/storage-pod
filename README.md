@@ -30,10 +30,12 @@ store(JSON.stringify({ hello: 'world' }), function(storeErr, key) {
 
 You can now send the key to the other process. It will just need to `GET` the key from Redis.
 
-As you want to serialize the value most of the time, you can provide a serialize function to the `createStorage` function as a third parameter. The serialize function is applied to your data before it is stored in Redis. In the following example we use JSON as our serialization format, but you can choose whatever you want (MsgPack, ProtoBuf, transit... Just provide a function that takes data and returns it serialized).
+As you want to serialize the value most of the time, you can provide a serialize function to the `createStorage` function as an option. The serialize function is applied to your data before it is stored in Redis. In the following example we use JSON as our serialization format, but you can choose whatever you want (MsgPack, ProtoBuf, transit... Just provide a function that takes data and returns it serialized).
 
 ```js
-var store = createStorage('mynamespace', client, JSON.stringify);
+var store = createStorage('mynamespace', client, {
+  serialize: JSON.stringify
+});
 
 // Now you can just provide an object:
 store({ hello: 'world' }, function(storeErr, key) {

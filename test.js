@@ -22,7 +22,7 @@ test('Save a result and get it back using a serialize function', function(t) {
   var uniqueValue = 'storagepodtest' + Date.now();
   var storedValue = { findme: uniqueValue };
 
-  var store = createStorage('hulabulo', client, JSON.stringify);
+  var store = createStorage('hulabulo', client, { serialize: JSON.stringify });
 
   store(storedValue, function(storeErr, key) {
     client.get([key], function(getErr, v) {
